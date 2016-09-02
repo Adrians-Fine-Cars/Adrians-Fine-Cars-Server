@@ -19,7 +19,18 @@ const Route = use("Route")
 
 Route.on("/").render("welcome")
 
-//User related Routes//
+//User related routes//
 Route.resources("users", "UserController")
 Route.post("/login", "UserController.login")
 Route.delete("/user/:id", "UserController.destroy").middleware("auth")
+
+//Vehicle related routes//
+Route.post("/vehicles", "VehicleController.store").middleware("auth")
+Route.get("/vehicles", "VehicleController.index")
+Route.get("/vehicles/:id", "VehicleController.show")
+Route.delete("/vehicles/:id", "VehicleController.destroy").middleware("auth")
+Route.put("/vehicles/:id", "VehicleController.update").middleware("auth")
+
+//Photo related routes//
+Route.get("/photos/:vehicle_id", "PhotoController.show").middleware("auth")
+Route.post("/photos/:vehicle_id", "PhotoController.store").middleware("auth")
